@@ -19,7 +19,7 @@ const HomePage = () => {
         </video>
 
         <div data-aos='fade-right' data-aos-once={true} className='second-section__box'>
-          Stay Focused and Collaborate
+          Stay Focused and Read
         </div>
       </div>
     </>
