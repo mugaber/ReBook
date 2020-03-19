@@ -1,5 +1,6 @@
 .nav-bar__segment {
   border-radius: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .rebook-name {
@@ -21,3 +22,21 @@
 .sign-up {
   margin-left: 0.3rem !important;
 }
+
+// .nav-bar__link {
+//   position: relative;
+//   top: 8px;
+
+//   height: 2.5rem;
+
+//   margin: 0 3px;
+//   padding: 0.5rem;
+
+//   border-radius: 5px;
+//   color: hsla(0, 0%, 100%, 0.9);
+
+//   &:hover {
+//     background-color: rgba(128, 128, 128, 0.344);
+//     color: white;
+//   }
+// }

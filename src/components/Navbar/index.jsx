@@ -3,12 +3,16 @@ import './style.scss'
 import Favicon from '../../shared/favicon.ico'
 
 import { Menu, Segment, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({ history }) => {
   const [activeItem, setActiveItem] = useState('home')
 
-  const handleClick = (e, { name }) => setActiveItem(name)
+  const handleClick = (e, { name }) => {
+    setActiveItem(name)
+    if (name === 'home') name = ''
+    history.push(`/${name}`)
+  }
 
   return (
     <Segment inverted className='nav-bar__segment'>
@@ -18,19 +22,15 @@ const Navbar = () => {
           ReBook
         </Menu.Item>
 
-        <Menu.Item name='home' active={activeItem === 'home'} onClick={handleClick}>
-          <Link to='/'>Home</Link>
-        </Menu.Item>
+        <Menu.Item name='home' active={activeItem === 'home'} onClick={handleClick} />
 
-        <Menu.Item name='search' active={activeItem === 'search'} onClick={handleClick}>
-          <Link className='link-button' to='/search'>
-            Search
-          </Link>
-        </Menu.Item>
+        <Menu.Item name='search' active={activeItem === 'search'} onClick={handleClick} />
 
-        <Menu.Item name='library' active={activeItem === 'library'} onClick={handleClick}>
-          <Link to='/library'>Library</Link>
-        </Menu.Item>
+        <Menu.Item
+          name='library'
+          active={activeItem === 'library'}
+          onClick={handleClick}
+        />
 
         <Menu.Menu position='right'>
           <Menu.Item>
@@ -47,4 +47,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default withRouter(Navbar)

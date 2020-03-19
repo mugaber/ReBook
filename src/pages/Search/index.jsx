@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import './style.scss'
 
-import Navbar from '../../components/Navbar'
-
 import _ from 'lodash'
 import faker from 'faker'
 import { Search } from 'semantic-ui-react'
@@ -42,8 +40,6 @@ export default class SearchExampleStandard extends Component {
 
     return (
       <>
-        <Navbar />
-
         <div className='search-bar__container'>
           <Search
             fluid={true}

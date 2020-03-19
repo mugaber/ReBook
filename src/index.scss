@@ -4,21 +4,15 @@
   box-sizing: border-box;
 }
 
-// style scrollbar
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
-  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(17, 17, 17, 0.745);
   border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(17, 17, 17);
 }

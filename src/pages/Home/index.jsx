@@ -1,24 +1,26 @@
 import React from 'react'
 import './style.scss'
 
-import Research from '../../shared/research-books.mp4'
-
-import Navbar from '../../components/Navbar'
+import StayFocusedVideo from '../../shared/stay-focused.mp4'
 
 const HomePage = () => {
   return (
     <>
       <div className='main-section__container'>
-        <Navbar />
         <div className='main-section__text'>
           <h1 className='header'>ReBook</h1>
           <p>Search, find, learn, add and imporve.</p>
         </div>
       </div>
+
       <div className='second-section__container'>
-        <video className='video__container' loop autoPlay>
-          <source src={Research} />
+        <video autoPlay loop width='100%'>
+          <source src={StayFocusedVideo} />
         </video>
+
+        <div data-aos='fade-right' data-aos-once={true} className='second-section__box'>
+          Stay Focused and Collaborate
+        </div>
       </div>
     </>
   )
