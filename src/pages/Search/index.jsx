@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './style.scss'
 
+import Navbar from '../../components/Navbar'
+
 import _ from 'lodash'
 import faker from 'faker'
 import { Search } from 'semantic-ui-react'
@@ -39,20 +41,24 @@ export default class SearchExampleStandard extends Component {
     const { isLoading, value, results } = this.state
 
     return (
-      <div className='search-bar__container'>
-        <Search
-          fluid={true}
-          size='huge'
-          placeholder='Search...'
-          loading={isLoading}
-          onResultSelect={this.handleResultSelect}
-          onSearchChange={_.debounce(this.handleSearchChange, 500, {
-            leading: true
-          })}
-          results={results}
-          value={value}
-        />
-      </div>
+      <>
+        <Navbar />
+
+        <div className='search-bar__container'>
+          <Search
+            fluid={true}
+            size='huge'
+            placeholder='Search...'
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+              leading: true
+            })}
+            results={results}
+            value={value}
+          />
+        </div>
+      </>
     )
   }
 }

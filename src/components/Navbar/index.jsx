@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <Segment inverted className='nav-bar__segment'>
-      <Menu size='huge' inverted secondary>
+      <Menu inverted secondary>
         <Menu.Item className='rebook-name'>
           <img src={Favicon} alt='favicon' />
           ReBook
