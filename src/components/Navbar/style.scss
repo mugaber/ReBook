@@ -1,0 +1,19 @@
+.nav-bar__segment {
+  border-radius: 0 !important;
+}
+
+.rebook-name {
+  margin-right: 4rem !important;
+}
+
+.button {
+  transition: all 0.3s !important;
+
+  &:active {
+    transform: translateY(3px);
+  }
+}
+
+.sign-up {
+  margin-left: 0.3rem !important;
+}
