@@ -1,12 +1,39 @@
 .search-bar__container {
   width: 50%;
-  margin: 10rem auto;
+  margin: 10rem auto 30rem;
 
   .input {
     width: 100%;
   }
 
   .results {
+    overflow: hidden;
+    max-height: 390px !important;
     margin-top: 1.5rem !important;
+  }
+
+  .content {
+    top: 15px;
+    position: relative;
+  }
+
+  position: relative;
+
+  .delete-icon {
+    cursor: pointer;
+
+    top: 1.3rem;
+    right: 3rem;
+    position: absolute;
+
+    transition: all 0.3s ease-in;
+
+    &:active {
+      transform: scale(1.3);
+    }
+
+    &:hover {
+      color: rgb(230, 0, 251);
+    }
   }
 }

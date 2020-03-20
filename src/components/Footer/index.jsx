@@ -21,7 +21,7 @@ const Footer = () => {
         <Grid divided inverted stackable>
           <Grid.Column width={16}>
             <Header inverted as='h2' content='ReBook' />
-            <h4>This app is made with love by Muhamed Gaber, using Google books API</h4>
+            <h4>Made with ❤ by Mu Gaber, using Google books API</h4>
             <p>Currently you can search for books and save them in the library.</p>
           </Grid.Column>
         </Grid>

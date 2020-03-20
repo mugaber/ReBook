@@ -17,6 +17,9 @@ AOS.init({
 })
 
 //
+require('dotenv').config()
+
+//
 if (module.hot) {
   module.hot.accept()
 }
