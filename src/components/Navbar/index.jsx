@@ -34,10 +34,10 @@ const Navbar = ({ history }) => {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            <Button as='a' className='button log-in' inverted>
+            <Button as='a' className='nav-button log-in' inverted>
               Log In
             </Button>
-            <Button as='a' className='button sign-up' inverted>
+            <Button as='a' className='nav-button sign-up' inverted>
               Sign Up
             </Button>
           </Menu.Item>
