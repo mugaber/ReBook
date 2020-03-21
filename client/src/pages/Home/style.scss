@@ -7,15 +7,11 @@
 
     text-align: center;
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url('../../shared/dark-bg-2.png');
+    background-color: rgba(222, 222, 222, 0.772);
   }
 
   &__text {
     font-size: 30px;
-    color: white;
 
     left: 50%;
     top: 44%;
@@ -30,27 +26,19 @@
 
 .second-section {
   &__container {
-    height: 100vh;
+    height: 80vh;
     width: 100vw;
-
-    position: relative;
-  }
-
-  &__box {
-    margin: 1rem;
-    width: 50%;
-
-    font-size: 5rem;
-    line-height: 5rem;
-    font-weight: bold;
 
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
-    top: 50%;
-    left: 5rem;
-    position: absolute;
-    transform: translateX(-50%) translateY(-50%);
+  &__text-box {
+    margin: 1rem;
+
+    font-size: 5rem;
+    line-height: 5rem;
+    font-weight: bold;
   }
 }

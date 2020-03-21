@@ -1,17 +1,19 @@
 {
-  "name": "rebook",
-  "description": "search for books, review, save and make comments",
+  "name": "rebook-client",
+  "description": "search for books and save to the library ",
   "version": "1.0.0",
   "private": true,
   "author": "mg",
   "license": "MIT",
+  "scripts": {
+    "start": "node node_modules/react-scripts/scripts/start.js",
+    "build": "node node_modules/react-scripts/scripts/build.js",
+    "test": "node node_modules/react-scripts/scripts/test.js",
+    "eject": "node node_modules/react-scripts/scripts/eject.js"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
     "aos": "^2.3.4",
     "dotenv": "^8.2.0",
-    "faker": "^4.1.0",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
@@ -21,11 +23,10 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2"
   },
-  "scripts": {
-    "start": "node node_modules/react-scripts/scripts/start.js",
-    "build": "node node_modules/react-scripts/scripts/build.js",
-    "test": "node node_modules/react-scripts/scripts/test.js",
-    "eject": "node node_modules/react-scripts/scripts/eject.js"
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,6 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }
