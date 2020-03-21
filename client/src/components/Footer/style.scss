@@ -8,8 +8,12 @@
 }
 
 .footer__link {
-  i:hover {
-    transform: scale(1);
+  i {
+    transition: all 0.2s ease-in !important;
+
+    &:hover {
+      transform: scale(1.4);
+    }
   }
 }
 

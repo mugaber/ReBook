@@ -23,22 +23,3 @@
     }
   }
 }
-
-.second-section {
-  &__container {
-    height: 80vh;
-    width: 100vw;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__text-box {
-    margin: 1rem;
-
-    font-size: 5rem;
-    line-height: 5rem;
-    font-weight: bold;
-  }
-}

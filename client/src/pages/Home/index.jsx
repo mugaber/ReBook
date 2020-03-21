@@ -10,16 +10,6 @@ const HomePage = () => {
           <p>Search, find, read, save add and imporve.</p>
         </div>
       </div>
-
-      <div className='second-section__container'>
-        <div
-          data-aos='fade-right'
-          data-aos-once={true}
-          className='second-section__text-box'
-        >
-          Stay Focused and Read
-        </div>
-      </div>
     </>
   )
 }

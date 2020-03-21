@@ -16,7 +16,7 @@ import {
 
 const Footer = () => {
   return (
-    <Segment inverted vertical style={{ margin: '20em 0em 0em', padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ padding: '5em 0em' }}>
       <Container textAlign='center'>
         <Grid divided inverted stackable>
           <Grid.Column width={16}>
@@ -42,7 +42,8 @@ const Footer = () => {
 
           <List.Item
             as='a'
-            href='https://github.com/Mu_Gaber'
+            target='_blank'
+            href='https://twitter.com/Mu_Gaber'
             className='footer__link twitter__link'
           >
             <Icon name='twitter' size='large' />
