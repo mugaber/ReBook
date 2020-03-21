@@ -7,7 +7,7 @@ const parseSearchItems = items => {
   const parsedItems = items.map(item => ({
     title: item.volumeInfo.title,
     image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.smallThumbnail : '',
-    booklink: ''
+    booklink: 'to be made'
   }))
 
   return parsedItems
@@ -50,8 +50,13 @@ const SearchPage = () => {
   const [searchItems, setSearchItems] = useState([])
 
   const handleResultSelect = (e, { result }) => {
-    console.log(result)
     setSearchString(result.title)
+
+    if (searchResponse.items) {
+      setSearchItems([])
+      setSearchItems(searchResponse.items)
+      setShowResults(true)
+    }
   }
 
   const handleSearchChange = async (e, { value }) => {
@@ -65,8 +70,11 @@ const SearchPage = () => {
     if (e.key === 'Enter') {
       document.getElementsByClassName('results')[0].classList.remove('visible')
 
-      searchResponse.items && setSearchItems(searchResponse.items)
-      setShowResults(true)
+      if (searchResponse.items) {
+        setSearchItems([])
+        setSearchItems(searchResponse.items)
+        setShowResults(true)
+      }
     }
   }
 
@@ -86,6 +94,12 @@ const SearchPage = () => {
           onResultSelect={handleResultSelect}
           onSearchChange={handleSearchChange}
         />
+
+        {searchResponse.totalItems && (
+          <Label color='teal' floating>
+            {searchResponse.totalItems}
+          </Label>
+        )}
 
         {searchString && (
           <Icon
