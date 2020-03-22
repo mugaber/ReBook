@@ -1,0 +1,25 @@
+{
+  "name": "rebook-api",
+  "version": "1.0.0",
+  "description": "search books, save to the library",
+  "main": "server.js",
+  "scripts": {
+    "client": "npm run start --prefix ../client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "googel-books-api"
+  ],
+  "author": "mg",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  }
+}

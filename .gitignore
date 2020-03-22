@@ -24,5 +24,10 @@ client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
 
+# =========================
+# CLIENT
+# =========================
 
-.env
+api/node_modules
+
+api/.env
