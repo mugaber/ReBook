@@ -7,6 +7,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 const authRoute = require('./routes/auth')
+const usersRoute = require('./routes/users')
 
 // init
 const app = express()
@@ -22,6 +23,7 @@ app.use(express.json())
 // routes
 app.get('/', (req, res) => res.send('API is running'))
 app.use('/api/auth', authRoute)
+app.use('/api/auth', usersRoute)
 
 // 404
 app.use((req, res) => res.status(404).send('Not found'))
