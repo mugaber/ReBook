@@ -1,8 +1,12 @@
 const express = require('express')
 require('dotenv').config()
 
+const connectDB = require('./config/db')
+
 // init
 const app = express()
+
+connectDB()
 
 // middlewares
 app.get('/', (req, res) => res.send('API is running'))
