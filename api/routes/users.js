@@ -19,7 +19,7 @@ router.post(
       .exists()
       .isLength(2),
     check('email', 'Please provide valid email').isEmail(),
-    check('passowrd', 'Please provide at least 6 char password').isLength(6)
+    check('password', 'Please provide at least 6 char password').isLength({ min: 6 })
   ],
 
   async (req, res) => {
@@ -35,7 +35,7 @@ router.post(
       const salt = bcrypt.genSaltSync(10)
       const hash = bcrypt.hashSync(password, salt)
 
-      const newUser = new User({ username, email, passowrd: hash })
+      const newUser = new User({ username, email, password: hash })
 
       await newUser.save()
 
@@ -50,7 +50,7 @@ router.post(
       )
     } catch (err) {
       console.log(err.message)
-      res.status(500).send('Internal Server Error.')
+      res.status(500).send(`Internal Server Error. ${err.message}`)
     }
   }
 )

@@ -23,7 +23,7 @@ app.use(express.json())
 // routes
 app.get('/', (req, res) => res.send('API is running'))
 app.use('/api/auth', authRoute)
-app.use('/api/auth', usersRoute)
+app.use('/api/users', usersRoute)
 
 // 404
 app.use((req, res) => res.status(404).send('Not found'))
