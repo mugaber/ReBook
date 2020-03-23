@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.scss'
 
 import Favicon from '../../shared/favicon.ico'
-import Signup from '../Signup'
+import SignupModal from '../Signup'
 
 import { Menu, Segment, Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
+//
 const Navbar = ({ history }) => {
+  const [currentUser, setCurrentUser] = useState(null)
+
+  useEffect(() => {
+    const localUser = localStorage.getItem('rebookUser')
+    setCurrentUser(localUser)
+  }, [currentUser])
+
   const [activeItem, setActiveItem] = useState('home')
 
   const [showSignup, setShowSignup] = useState(false)
@@ -38,30 +46,46 @@ const Navbar = ({ history }) => {
           onClick={handleMenuItemClick}
         />
 
-        <Menu.Item
-          name='library'
-          active={activeItem === 'library'}
-          onClick={handleMenuItemClick}
-        />
+        {currentUser && (
+          <Menu.Item
+            name='library'
+            active={activeItem === 'library'}
+            onClick={handleMenuItemClick}
+          />
+        )}
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            <Button as='a' className='nav-button log-in' color='green' inverted>
-              Log In
-            </Button>
+            {currentUser ? (
+              <Button className='nav-button' color='red' inverted>
+                Log Out
+              </Button>
+            ) : (
+              <>
+                <Button as='a' className='nav-button log-in' color='green' inverted>
+                  Log In
+                </Button>
 
-            <Button
-              as='a'
-              className='nav-button sign-up'
-              inverted
-              onClick={() => setShowSignup(true)}
-            >
-              Sign Up
-            </Button>
+                <Button
+                  as='a'
+                  className='nav-button sign-up'
+                  inverted
+                  onClick={() => setShowSignup(true)}
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </Menu.Item>
         </Menu.Menu>
 
-        {showSignup && <Signup showModal={showSignup} setShowModal={setShowSignup} />}
+        {showSignup && (
+          <SignupModal
+            showModal={showSignup}
+            setShowModal={setShowSignup}
+            setUser={setCurrentUser}
+          />
+        )}
       </Menu>
     </Segment>
   )

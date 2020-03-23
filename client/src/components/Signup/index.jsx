@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-import { Modal, Form, Popup, Button, Label, Icon } from 'semantic-ui-react'
+import axios from 'axios'
+
+import { Modal, Form, Popup, Button, Label, Icon, Message } from 'semantic-ui-react'
 
 const initFormErrors = {
   username: { state: false, text: '' },
@@ -9,7 +11,8 @@ const initFormErrors = {
   password: { state: false, text: '' }
 }
 
-const Signup = ({ showModal, setShowModal }) => {
+//
+const Signup = ({ showModal, setShowModal, setUser }) => {
   const [formInputs, setFormInputs] = useState({
     username: '',
     email: '',
@@ -27,7 +30,13 @@ const Signup = ({ showModal, setShowModal }) => {
 
   const [formLoading, setFormLoading] = useState(false)
 
-  const handleSubmit = e => {
+  const [signupResponse, setSignupResponse] = useState({
+    show: false,
+    type: '',
+    text: ''
+  })
+
+  const handleSubmit = async e => {
     const emailRe = /^(\w){2,20}@(\w){2,10}\.(\w){2,10}$/gi
     const usernameRe = /^(\w){2,25}$/gi
 
@@ -56,16 +65,40 @@ const Signup = ({ showModal, setShowModal }) => {
       })
 
     setFormLoading(true)
-    setTimeout(() => {
+
+    try {
+      const config = { headers: { 'Content-Type': 'application/json' } }
+      const body = JSON.stringify({ username, email, password })
+      const res = await axios.post('http://localhost:5000/api/users', body, config)
+
+      console.log(res)
+
+      setUser(email)
+      localStorage.setItem('rebookUser', email)
+      localStorage.setItem('rebookToken', res.token)
+
       setFormLoading(false)
-      setShowModal(false)
-    }, 500)
+      setSignupResponse({ show: true, type: 'success' })
+    } catch (error) {
+      console.log('error signing up', error.response)
+
+      setTimeout(() => setFormLoading(false), 500)
+      setSignupResponse({
+        show: true,
+        type: 'error',
+        text: error.response.data.errors[0].msg
+      })
+    }
   }
 
   return (
     <Modal open={showModal} size='tiny'>
       <Modal.Header>Sign up</Modal.Header>
       <Modal.Content>
+        <Label floating style={{ cursor: 'pointer' }} onClick={() => setShowModal(false)}>
+          <Icon name='close' />
+        </Label>
+
         <Form size='large' onSubmit={handleSubmit} loading={formLoading}>
           <Popup
             inverted
@@ -134,16 +167,18 @@ const Signup = ({ showModal, setShowModal }) => {
           <Button color='teal' fluid size='large' className='register-button'>
             Register
           </Button>
-        </Form>
 
-        <Label
-          floating
-          color='red'
-          style={{ cursor: 'pointer' }}
-          onClick={() => setShowModal(false)}
-        >
-          <Icon name='close' />
-        </Label>
+          {signupResponse.show && signupResponse.type === 'success' && (
+            <Message
+              header='Sign up success'
+              content='Now you can save books to the library'
+            />
+          )}
+
+          {signupResponse.show && signupResponse.type === 'error' && (
+            <Message error header='Sign up failure' content={signupResponse.text} />
+          )}
+        </Form>
       </Modal.Content>
     </Modal>
   )
