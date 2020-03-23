@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './style.scss'
 
 import Favicon from '../../shared/favicon.ico'
-import SignModal from '../SignModal'
+import Signup from '../Signup'
 
 import { Menu, Segment, Button } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
@@ -10,15 +10,7 @@ import { withRouter } from 'react-router-dom'
 const Navbar = ({ history }) => {
   const [activeItem, setActiveItem] = useState('home')
 
-  const [showSignModal, setShowSignModal] = useState(false)
-
-  const [activeSignTab, setActiveSignTab] = useState(0)
-
-  const handleSignClick = e => {
-    if (e.target.name === 'sign-up') setActiveSignTab(0)
-    if (e.target.name === 'log-in') setActiveSignTab(1)
-    setShowSignModal(!showSignModal)
-  }
+  const [showSignup, setShowSignup] = useState(false)
 
   const handleMenuItemClick = (e, { name }) => {
     setActiveItem(name)
@@ -54,14 +46,7 @@ const Navbar = ({ history }) => {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            <Button
-              as='a'
-              className='nav-button log-in'
-              color='green'
-              inverted
-              name='log-in'
-              onClick={handleSignClick}
-            >
+            <Button as='a' className='nav-button log-in' color='green' inverted>
               Log In
             </Button>
 
@@ -69,22 +54,14 @@ const Navbar = ({ history }) => {
               as='a'
               className='nav-button sign-up'
               inverted
-              name='sign-up'
-              onClick={handleSignClick}
+              onClick={() => setShowSignup(true)}
             >
               Sign Up
             </Button>
           </Menu.Item>
         </Menu.Menu>
 
-        {showSignModal && (
-          <SignModal
-            showModal={showSignModal}
-            setShowModal={setShowSignModal}
-            activeTab={activeSignTab}
-            setActiveTab={setActiveSignTab}
-          />
-        )}
+        {showSignup && <Signup showModal={showSignup} setShowModal={setShowSignup} />}
       </Menu>
     </Segment>
   )

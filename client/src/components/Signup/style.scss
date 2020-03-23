@@ -1,0 +1,9 @@
+.register-button {
+  transition: all 0.2s ease-in !important;
+  box-shadow: 1px 3px 10px grey !important;
+
+  &:active {
+    transform: translateY(3px);
+    box-shadow: 0 0 !important;
+  }
+}
