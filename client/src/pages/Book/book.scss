@@ -1,0 +1,27 @@
+.book-page__container {
+  position: relative;
+  padding: 3rem 0 2rem;
+  background-color: rgb(223, 222, 222);
+
+  .book__container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .open-view {
+    width: 500px;
+    height: 500px;
+    margin: 1rem auto;
+  }
+
+  .canvas-buttons__container {
+    top: 10%;
+    right: 0%;
+    margin: 1rem;
+    position: fixed;
+    box-shadow: 0.5px 10px 30px grey;
+  }
+}

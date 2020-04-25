@@ -7,6 +7,17 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Search for books, save and comment." />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <script type="text/javascript">
+      google.books.load() // Embedded viewer API
+
+      function viewCanvas(ISBN, elId) {
+        const viewer = new google.books.DefaultViewer(document.getElementById(elId))
+        viewer.load(`ISBN:${ISBN}`)
+      }
+    </script>
+
     <title>ReBook</title>
   </head>
   <body>

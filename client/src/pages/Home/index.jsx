@@ -7,7 +7,7 @@ const HomePage = () => {
       <div className='main-section__container'>
         <div className='main-section__text'>
           <h1 className='header'>ReBook</h1>
-          <p>Search, find, read, save add and imporve.</p>
+          <p>Search, find, read and save.</p>
         </div>
       </div>
     </>

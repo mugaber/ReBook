@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss'
 
-import Favicon from '../../shared/favicon.ico'
+import Favicon from '../../assets/favicon.ico'
 
 import {
   Segment,
@@ -11,8 +11,10 @@ import {
   List,
   Divider,
   Image,
-  Icon
+  Icon,
 } from 'semantic-ui-react'
+
+//
 
 const Footer = () => {
   return (

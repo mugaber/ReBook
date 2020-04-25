@@ -5,17 +5,17 @@ import ResultItem from '../../components/ResultItem'
 
 import { Search, Grid, Icon, Label } from 'semantic-ui-react'
 
-const parseSearchResults = items => {
-  return items.map(item => ({
+const parseSearchResults = items =>
+  items.map(item => ({
     title: item.volumeInfo.title,
     image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.smallThumbnail : '',
-    booklink: 'to be made'
+    booklink: 'to be made',
   }))
-}
+
+//
 
 const SearchPage = () => {
   const [searchString, setSearchString] = useState('')
-
   const [searchResults, setSearchResults] = useState([])
 
   useEffect(() => {
@@ -31,7 +31,6 @@ const SearchPage = () => {
             setSearchResponse(data)
             if (data.totalItems === 0) return setIsLoading(false)
             const parsedData = parseSearchResults(data.items)
-            setSearchResults([])
             setSearchResults(parsedData)
           })
       } catch (err) {

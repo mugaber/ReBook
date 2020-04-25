@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import './style.scss'
 
-import Favicon from '../../shared/favicon.ico'
 import SignupModal from '../Signup'
-
+import Favicon from '../../assets/favicon.ico'
 import { Menu, Segment, Button } from 'semantic-ui-react'
-import { withRouter } from 'react-router-dom'
 
 //
+
 const Navbar = ({ history }) => {
   const [currentUser, setCurrentUser] = useState(null)
 
