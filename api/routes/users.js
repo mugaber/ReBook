@@ -15,11 +15,9 @@ router.post(
   '/',
 
   [
-    check('username', 'Username is required and at least 2 char')
-      .exists()
-      .isLength(2),
+    check('username', 'Username is required and at least 2 char').exists().isLength(2),
     check('email', 'Please provide valid email').isEmail(),
-    check('password', 'Please provide at least 6 char password').isLength({ min: 6 })
+    check('password', 'Please provide at least 6 char password').isLength({ min: 6 }),
   ],
 
   async (req, res) => {

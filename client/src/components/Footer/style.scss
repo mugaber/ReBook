@@ -1,9 +1,7 @@
 .footer__container {
   width: 100%;
   height: 40vh;
-
   margin-top: 0rem;
-
   background-color: #111; // #20232a
 }
 
@@ -17,20 +15,14 @@
   }
 }
 
-.github__link {
-  i:hover {
-    color: white !important;
-  }
+.github__link i:hover {
+  color: white !important;
 }
 
-.linkedin__link {
-  i:hover {
-    color: #0e76a8 !important;
-  }
+.linkedin__link i:hover {
+  color: #0e76a8 !important;
 }
 
-.twitter__link {
-  i:hover {
-    color: #00acee !important;
-  }
+.twitter__link i:hover {
+  color: #00acee !important;
 }

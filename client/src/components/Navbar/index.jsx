@@ -2,23 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import './style.scss'
 
-import SignupModal from '../Signup'
 import Favicon from '../../assets/favicon.ico'
 import { Menu, Segment, Button } from 'semantic-ui-react'
 
 //
 
-const Navbar = ({ history }) => {
+const Navbar = ({ history, location }) => {
   const [currentUser, setCurrentUser] = useState(null)
+  const [activeItem, setActiveItem] = useState(location.pathname.slice(1))
 
   useEffect(() => {
     const localUser = localStorage.getItem('rebookUser')
     setCurrentUser(localUser)
   }, [currentUser])
-
-  const [activeItem, setActiveItem] = useState('home')
-
-  const [showSignup, setShowSignup] = useState(false)
 
   const handleMenuItemClick = (e, { name }) => {
     setActiveItem(name)
@@ -68,9 +64,9 @@ const Navbar = ({ history }) => {
 
                 <Button
                   as='a'
-                  className='nav-button sign-up'
                   inverted
-                  onClick={() => setShowSignup(true)}
+                  className='nav-button sign-up'
+                  onClick={() => history.push('/signup')}
                 >
                   Sign Up
                 </Button>
@@ -78,14 +74,6 @@ const Navbar = ({ history }) => {
             )}
           </Menu.Item>
         </Menu.Menu>
-
-        {showSignup && (
-          <SignupModal
-            showModal={showSignup}
-            setShowModal={setShowSignup}
-            setUser={setCurrentUser}
-          />
-        )}
       </Menu>
     </Segment>
   )

@@ -14,7 +14,6 @@ const BookPage = ({ location }) => {
   const [viewOpen, setViewOpen] = useState(false)
 
   const handleViewClick = () => {
-    console.log(item)
     const ISBN = volumeInfo.industryIdentifiers[0].identifier
 
     if (!loaded) {

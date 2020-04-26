@@ -1,9 +1,14 @@
 ## ADDITIONS
 
-- Book page to view a specific book and embedded view if exists
-- BookItem Comp. for comp reuse in Book Page and ResultItem
-- added google embedded viewer API
+- utils folder: validateSginup, signupUser
 
 ## CHANGES
 
-- shared -> assets
+- Signup Modal -> Signup Page
+- Navbar active page, set using location.pathname
+  (because it was rerendered if refresh setting the state to home again)
+- updated Navbar to no longer check for user, just consume UserContext
+
+# API
+
+- changed DB URI

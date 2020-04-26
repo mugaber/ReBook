@@ -54,7 +54,7 @@ const Footer = () => {
           <List.Item
             as='a'
             target='_blank'
-            href='https://github.com/mugaber'
+            href='https://www.linkedin.com/in/muhamed-gaber/'
             className='footer__link linkedin__link'
           >
             <Icon name='linkedin' size='large' />
