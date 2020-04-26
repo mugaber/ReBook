@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { loadUser } from './utils/auth'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -12,6 +13,10 @@ import SignupPage from './pages/Signup'
 //
 
 function App() {
+  useEffect(() => {
+    loadUser()
+  }, [])
+
   return (
     <Router>
       <Navbar />

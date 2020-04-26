@@ -36,11 +36,11 @@ export async function signupUser(username, email, password) {
   try {
     const config = { headers: { 'Content-Type': 'application/json' } }
     const body = JSON.stringify({ username, email, password })
-    const res = await axios.post('http://localhost:5000/api/users', body, config)
+    const res = await axios.post('/users', body, config)
 
     console.log('signup success', res)
 
-    localStorage.setItem('rebookUser', email)
+    localStorage.setItem('rebookUser', username)
     localStorage.setItem('rebookToken', res.token)
 
     return { res, type: 'success' }

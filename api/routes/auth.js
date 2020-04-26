@@ -17,7 +17,7 @@ router.get('/', auth, async (req, res) => {
     const user = await User.findById(req.user.id).select('-password')
     res.json({ user })
   } catch (error) {
-    console.log(error.message)
+    // error -> message
     res.status(500).send('Server Error')
   }
 })
@@ -33,7 +33,7 @@ router.post(
 
   [
     check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please include a password').exists()
+    check('password', 'Please include a password').exists(),
   ],
 
   async (req, res) => {

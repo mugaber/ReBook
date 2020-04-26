@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import './style.scss'
 
+import { UserContext } from '../../providers'
 import Favicon from '../../assets/favicon.ico'
 import { Menu, Segment, Button } from 'semantic-ui-react'
 
 //
 
 const Navbar = ({ history, location }) => {
-  const [currentUser, setCurrentUser] = useState(null)
+  const { user: currentUser } = useContext(UserContext)
   const [activeItem, setActiveItem] = useState(location.pathname.slice(1))
-
-  useEffect(() => {
-    const localUser = localStorage.getItem('rebookUser')
-    setCurrentUser(localUser)
-  }, [currentUser])
 
   const handleMenuItemClick = (e, { name }) => {
     setActiveItem(name)

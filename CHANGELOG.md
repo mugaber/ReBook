@@ -1,14 +1,11 @@
 ## ADDITIONS
 
-- utils folder: validateSginup, signupUser
+- UserContext and UserProvider
+- utils -> auth: loadUser, setAuthToken
 
 ## CHANGES
 
-- Signup Modal -> Signup Page
-- Navbar active page, set using location.pathname
-  (because it was rerendered if refresh setting the state to home again)
+- checkUser at the top level App Comp.
 - updated Navbar to no longer check for user, just consume UserContext
 
 # API
-
-- changed DB URI
