@@ -2,19 +2,18 @@ import React, { useState, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import './style.scss'
 
-import { UserContext } from '../../providers'
 import Favicon from '../../assets/favicon.ico'
-import { Menu, Segment, Button } from 'semantic-ui-react'
+import { UserContext } from '../../providers/user'
+import { Menu, Segment, Button, Dropdown, Image } from 'semantic-ui-react'
 
 //
 
 const Navbar = ({ history, location }) => {
-  const { user: currentUser } = useContext(UserContext)
+  const { userData, logoutUser } = useContext(UserContext)
   const [activeItem, setActiveItem] = useState(location.pathname.slice(1))
 
   const handleMenuItemClick = (e, { name }) => {
     setActiveItem(name)
-    if (name === 'home') name = ''
     history.push(`/${name}`)
   }
 
@@ -26,11 +25,9 @@ const Navbar = ({ history, location }) => {
           ReBook
         </Menu.Item>
 
-        <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
-          onClick={handleMenuItemClick}
-        />
+        <Menu.Item name='' active={activeItem === ''} onClick={handleMenuItemClick}>
+          Home
+        </Menu.Item>
 
         <Menu.Item
           name='search'
@@ -38,7 +35,7 @@ const Navbar = ({ history, location }) => {
           onClick={handleMenuItemClick}
         />
 
-        {currentUser && (
+        {userData.isAuthenticated && userData.user && (
           <Menu.Item
             name='library'
             active={activeItem === 'library'}
@@ -48,13 +45,36 @@ const Navbar = ({ history, location }) => {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            {currentUser ? (
-              <Button className='nav-button' color='red' inverted>
-                Log Out
-              </Button>
+            {userData.isAuthenticated && userData.user ? (
+              <Dropdown
+                pointing='top left'
+                trigger={
+                  <>
+                    <Image
+                      avatar
+                      src='https://react.semantic-ui.com/images/wireframe/square-image.png'
+                    />
+                    {userData.user.username}
+                  </>
+                }
+                options={[
+                  {
+                    key: 'sign-out',
+                    text: 'Sign Out',
+                    icon: 'sign out',
+                    onClick: () => logoutUser()
+                  }
+                ]}
+              />
             ) : (
               <>
-                <Button as='a' className='nav-button log-in' color='green' inverted>
+                <Button
+                  as='a'
+                  className='nav-button log-in'
+                  color='green'
+                  inverted
+                  onClick={() => history.push('/login')}
+                >
                   Log In
                 </Button>
 

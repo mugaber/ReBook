@@ -6,9 +6,6 @@ const connectDB = require('./config/db')
 const cors = require('cors')
 const helmet = require('helmet')
 
-const authRoute = require('./routes/auth')
-const usersRoute = require('./routes/users')
-
 // init
 const app = express()
 connectDB()
@@ -19,11 +16,11 @@ app.use(helmet())
 
 // middlewares
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // routes
 app.get('/', (req, res) => res.send('API is running'))
-app.use('/api/auth', authRoute)
-app.use('/api/users', usersRoute)
+app.use('/api/users', require('./routes/users'))
 
 // 404
 app.use((req, res) => res.status(404).send('Not found'))

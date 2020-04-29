@@ -1,30 +1,29 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../../providers/user'
-import './style.scss'
+import './login.scss'
 
-import { validateSignup } from '../../utils'
+import { validateLogin } from '../../utils'
 import { Form, Popup, Button, Message } from 'semantic-ui-react'
 
 //
 
 const initFormErrors = {
-  username: { state: false, text: '' },
   email: { state: false, text: '' },
   password: { state: false, text: '' }
 }
 
 //
 
-const SignupForm = () => {
-  const { signupUser } = useContext(UserContext)
+const LoginForm = () => {
+  const { loginUser } = useContext(UserContext)
 
-  const [formInputs, setFormInputs] = useState({ username: '', email: '', password: '' })
-  const { username, email, password } = formInputs
+  const [formInputs, setFormInputs] = useState({ email: '', password: '' })
+  const { email, password } = formInputs
 
   const [formLoading, setFormLoading] = useState(false)
   const [formErrors, setFormErrors] = useState(initFormErrors)
 
-  const [signupResponse, setSignupResponse] = useState({ show: false, errors: [] })
+  const [loginResponse, setLoginResponse] = useState({ show: false, errors: [] })
 
   const handleInputChange = e => {
     setFormErrors(initFormErrors)
@@ -32,49 +31,26 @@ const SignupForm = () => {
   }
 
   const handleSubmit = async e => {
-    const validateData = validateSignup(username, email, password)
+    const validateData = validateLogin(email, password)
 
     if (validateData.name)
       return setFormErrors({ ...formErrors, [validateData.name]: validateData.value })
 
     setFormLoading(true)
 
-    const res = await signupUser(username, email, password)
+    // if only error
+    const res = await loginUser(email, password)
 
     if (res) {
-      setSignupResponse({
-        show: true,
-        errors: res.data.errors
-      })
+      setLoginResponse({ show: true, errors: res.data.errors })
     }
 
     setFormLoading(false)
-    setTimeout(() => setSignupResponse({ show: false, errors: [] }), 6000)
+    setTimeout(() => setLoginResponse({ show: false, errors: [] }), 6000)
   }
 
   return (
     <Form size='large' onSubmit={handleSubmit} loading={formLoading}>
-      <Popup
-        inverted
-        style={{ opacity: 0.8 }}
-        position='right center'
-        open={formErrors.username.state}
-        content={formErrors.username.text}
-        trigger={
-          <Form.Input
-            fluid
-            icon='user'
-            iconPosition='left'
-            required
-            name='username'
-            value={username}
-            placeholder='Username'
-            onChange={handleInputChange}
-            error={formErrors.username.state}
-          />
-        }
-      />
-
       <Popup
         inverted
         style={{ opacity: 0.8 }}
@@ -118,16 +94,16 @@ const SignupForm = () => {
         }
       />
 
-      <Button color='teal' fluid size='large' className='register-button'>
-        Register
+      <Button color='teal' fluid size='large' className='login-button'>
+        Login
       </Button>
 
-      {signupResponse.show &&
-        signupResponse.errors.map(error => (
+      {loginResponse.show &&
+        loginResponse.errors.map(error => (
           <Message key={error.msg} color='red' header={error.param} content={error.msg} />
         ))}
     </Form>
   )
 }
 
-export default SignupForm
+export default LoginForm
