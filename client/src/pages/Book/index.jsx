@@ -41,25 +41,27 @@ const BookPage = ({ location }) => {
 
       {/* view embed book canvas */}
 
-      {accessInfo.embeddable && volumeInfo.industryIdentifiers.length && (
-        <div className='canvas-buttons__container'>
-          {!viewOpen ? (
-            <Button animated fluid color='teal' onClick={handleViewClick}>
-              <Button.Content visible>View Book</Button.Content>
-              <Button.Content hidden>
-                <Icon name='book' />
-              </Button.Content>
-            </Button>
-          ) : (
-            <Button animated fluid color='grey' onClick={handleViewClick}>
-              <Button.Content visible>Hide Book</Button.Content>
-              <Button.Content hidden>
-                <Icon name='hide' />
-              </Button.Content>
-            </Button>
-          )}
-        </div>
-      )}
+      {accessInfo.embeddable &&
+        volumeInfo.industryIdentifiers &&
+        volumeInfo.industryIdentifiers.length && (
+          <div className='canvas-buttons__container'>
+            {!viewOpen ? (
+              <Button animated fluid color='teal' onClick={handleViewClick}>
+                <Button.Content visible>View Book</Button.Content>
+                <Button.Content hidden>
+                  <Icon name='book' />
+                </Button.Content>
+              </Button>
+            ) : (
+              <Button animated fluid color='grey' onClick={handleViewClick}>
+                <Button.Content visible>Hide Book</Button.Content>
+                <Button.Content hidden>
+                  <Icon name='hide' />
+                </Button.Content>
+              </Button>
+            )}
+          </div>
+        )}
 
       <div id='viewCanvas' className={viewOpen ? 'open-view' : ''}></div>
     </div>
