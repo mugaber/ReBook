@@ -1,6 +1,8 @@
-import React, { useState, useContext } from 'react'
-import { UserContext } from '../../providers/user'
+import React, { useState } from 'react'
 import './login.scss'
+
+import { connect } from 'react-redux'
+import { login } from '../../redux/user/actions'
 
 import { validateLogin } from '../../utils'
 import { Form, Popup, Button, Message } from 'semantic-ui-react'
@@ -14,9 +16,7 @@ const initFormErrors = {
 
 //
 
-const LoginForm = () => {
-  const { loginUser } = useContext(UserContext)
-
+const LoginForm = ({ login }) => {
   const [formInputs, setFormInputs] = useState({ email: '', password: '' })
   const { email, password } = formInputs
 
@@ -39,7 +39,7 @@ const LoginForm = () => {
     setFormLoading(true)
 
     // if only error
-    const res = await loginUser(email, password)
+    const res = await login(email, password)
 
     if (res) {
       setLoginResponse({ show: true, errors: res.data.errors })
@@ -50,22 +50,22 @@ const LoginForm = () => {
   }
 
   return (
-    <Form size='large' onSubmit={handleSubmit} loading={formLoading}>
+    <Form size="large" onSubmit={handleSubmit} loading={formLoading}>
       <Popup
         inverted
         style={{ opacity: 0.8 }}
-        position='right center'
+        position="right center"
         open={formErrors.email.state}
         content={formErrors.email.text}
         trigger={
           <Form.Input
             fluid
-            icon='mail'
-            iconPosition='left'
+            icon="mail"
+            iconPosition="left"
             required
-            name='email'
+            name="email"
             value={email}
-            placeholder='E-mail'
+            placeholder="E-mail"
             onChange={handleInputChange}
             error={formErrors.email.state}
           />
@@ -75,35 +75,35 @@ const LoginForm = () => {
       <Popup
         inverted
         style={{ opacity: 0.8 }}
-        position='right center'
+        position="right center"
         open={formErrors.password.state}
         content={formErrors.password.text}
         trigger={
           <Form.Input
             fluid
-            icon='lock'
-            type='password'
-            iconPosition='left'
+            icon="lock"
+            type="password"
+            iconPosition="left"
             required
-            name='password'
+            name="password"
             value={password}
-            placeholder='Password'
+            placeholder="Password"
             onChange={handleInputChange}
             error={formErrors.password.state}
           />
         }
       />
 
-      <Button color='teal' fluid size='large' className='login-button'>
+      <Button color="teal" fluid size="large" className="login-button">
         Login
       </Button>
 
       {loginResponse.show &&
         loginResponse.errors.map(error => (
-          <Message key={error.msg} color='red' header={error.param} content={error.msg} />
+          <Message key={error.msg} color="red" header={error.param} content={error.msg} />
         ))}
     </Form>
   )
 }
 
-export default LoginForm
+export default connect(null, { login })(LoginForm)

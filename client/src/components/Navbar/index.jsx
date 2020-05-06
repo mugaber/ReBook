@@ -1,15 +1,16 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import './style.scss'
 
+import { connect } from 'react-redux'
+import { logout } from '../../redux/user/actions'
+
 import Favicon from '../../assets/favicon.ico'
-import { UserContext } from '../../providers/user'
 import { Menu, Segment, Button, Dropdown, Image } from 'semantic-ui-react'
 
 //
 
-const Navbar = ({ history, location }) => {
-  const { userData, logoutUser } = useContext(UserContext)
+const Navbar = ({ history, location, user }) => {
   const [activeItem, setActiveItem] = useState(location.pathname.slice(1))
 
   const handleMenuItemClick = (e, { name }) => {
@@ -18,43 +19,43 @@ const Navbar = ({ history, location }) => {
   }
 
   return (
-    <Segment inverted className='nav-bar__segment'>
+    <Segment inverted className="nav-bar__segment">
       <Menu inverted secondary>
-        <Menu.Item className='rebook-name'>
-          <img src={Favicon} alt='favicon' />
+        <Menu.Item className="rebook-name">
+          <img src={Favicon} alt="favicon" />
           ReBook
         </Menu.Item>
 
-        <Menu.Item name='' active={activeItem === ''} onClick={handleMenuItemClick}>
+        <Menu.Item name="" active={activeItem === ''} onClick={handleMenuItemClick}>
           Home
         </Menu.Item>
 
         <Menu.Item
-          name='search'
+          name="search"
           active={activeItem === 'search'}
           onClick={handleMenuItemClick}
         />
 
-        {userData.isAuthenticated && userData.user && (
+        {user.isAuthenticated && user.user && (
           <Menu.Item
-            name='library'
+            name="library"
             active={activeItem === 'library'}
             onClick={handleMenuItemClick}
           />
         )}
 
-        <Menu.Menu position='right'>
+        <Menu.Menu position="right">
           <Menu.Item>
-            {userData.isAuthenticated && userData.user ? (
+            {user.isAuthenticated && user.user ? (
               <Dropdown
-                pointing='top left'
+                pointing="top left"
                 trigger={
                   <>
                     <Image
                       avatar
-                      src='https://react.semantic-ui.com/images/wireframe/square-image.png'
+                      src="https://react.semantic-ui.com/images/wireframe/square-image.png"
                     />
-                    {userData.user.username}
+                    {user.user.username}
                   </>
                 }
                 options={[
@@ -62,16 +63,16 @@ const Navbar = ({ history, location }) => {
                     key: 'sign-out',
                     text: 'Sign Out',
                     icon: 'sign out',
-                    onClick: () => logoutUser()
+                    onClick: () => logout()
                   }
                 ]}
               />
             ) : (
               <>
                 <Button
-                  as='a'
-                  className='nav-button log-in'
-                  color='green'
+                  as="a"
+                  className="nav-button log-in"
+                  color="green"
                   inverted
                   onClick={() => history.push('/login')}
                 >
@@ -79,9 +80,9 @@ const Navbar = ({ history, location }) => {
                 </Button>
 
                 <Button
-                  as='a'
+                  as="a"
                   inverted
-                  className='nav-button sign-up'
+                  className="nav-button sign-up"
                   onClick={() => history.push('/signup')}
                 >
                   Sign Up
@@ -95,4 +96,8 @@ const Navbar = ({ history, location }) => {
   )
 }
 
-export default withRouter(Navbar)
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default withRouter(connect(mapStateToProps, { logout })(Navbar))

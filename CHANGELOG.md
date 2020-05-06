@@ -2,6 +2,4 @@
 
 ## CLIENT
 
-- Spinner
-- ErrorBoundary
-- some performance optimizations
+- switched to using redux with other libraries

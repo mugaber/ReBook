@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../../providers/user'
 import './style.scss'
 
+import { connect } from 'react-redux'
+import { register } from '../../redux/user/actions'
+
 import { validateSignup } from '../../utils'
 import { Form, Popup, Button, Message } from 'semantic-ui-react'
 
@@ -15,9 +18,7 @@ const initFormErrors = {
 
 //
 
-const SignupForm = () => {
-  const { signupUser } = useContext(UserContext)
-
+const SignupForm = ({ register }) => {
   const [formInputs, setFormInputs] = useState({ username: '', email: '', password: '' })
   const { username, email, password } = formInputs
 
@@ -39,7 +40,7 @@ const SignupForm = () => {
 
     setFormLoading(true)
 
-    const res = await signupUser(username, email, password)
+    const res = await register(username, email, password)
 
     if (res) {
       setSignupResponse({
@@ -53,22 +54,22 @@ const SignupForm = () => {
   }
 
   return (
-    <Form size='large' onSubmit={handleSubmit} loading={formLoading}>
+    <Form size="large" onSubmit={handleSubmit} loading={formLoading}>
       <Popup
         inverted
         style={{ opacity: 0.8 }}
-        position='right center'
+        position="right center"
         open={formErrors.username.state}
         content={formErrors.username.text}
         trigger={
           <Form.Input
             fluid
-            icon='user'
-            iconPosition='left'
+            icon="user"
+            iconPosition="left"
             required
-            name='username'
+            name="username"
             value={username}
-            placeholder='Username'
+            placeholder="Username"
             onChange={handleInputChange}
             error={formErrors.username.state}
           />
@@ -78,18 +79,18 @@ const SignupForm = () => {
       <Popup
         inverted
         style={{ opacity: 0.8 }}
-        position='right center'
+        position="right center"
         open={formErrors.email.state}
         content={formErrors.email.text}
         trigger={
           <Form.Input
             fluid
-            icon='mail'
-            iconPosition='left'
+            icon="mail"
+            iconPosition="left"
             required
-            name='email'
+            name="email"
             value={email}
-            placeholder='E-mail'
+            placeholder="E-mail"
             onChange={handleInputChange}
             error={formErrors.email.state}
           />
@@ -99,35 +100,35 @@ const SignupForm = () => {
       <Popup
         inverted
         style={{ opacity: 0.8 }}
-        position='right center'
+        position="right center"
         open={formErrors.password.state}
         content={formErrors.password.text}
         trigger={
           <Form.Input
             fluid
-            icon='lock'
-            type='password'
-            iconPosition='left'
+            icon="lock"
+            type="password"
+            iconPosition="left"
             required
-            name='password'
+            name="password"
             value={password}
-            placeholder='Password'
+            placeholder="Password"
             onChange={handleInputChange}
             error={formErrors.password.state}
           />
         }
       />
 
-      <Button color='teal' fluid size='large' className='register-button'>
+      <Button color="teal" fluid size="large" className="register-button">
         Register
       </Button>
 
       {signupResponse.show &&
         signupResponse.errors.map(error => (
-          <Message key={error.msg} color='red' header={error.param} content={error.msg} />
+          <Message key={error.msg} color="red" header={error.param} content={error.msg} />
         ))}
     </Form>
   )
 }
 
-export default SignupForm
+export default connect(null, { register })(SignupForm)
