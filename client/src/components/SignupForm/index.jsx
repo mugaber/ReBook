@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react'
-import { UserContext } from '../../providers/user'
+import React, { useState } from 'react'
 import './style.scss'
 
 import { connect } from 'react-redux'
 import { register } from '../../redux/user/actions'
+import { setAlert } from '../../redux/alert/actions'
 
 import { validateSignup } from '../../utils'
 import { Form, Popup, Button, Message } from 'semantic-ui-react'
@@ -18,7 +18,7 @@ const initFormErrors = {
 
 //
 
-const SignupForm = ({ register }) => {
+const SignupForm = ({ register, setAlert }) => {
   const [formInputs, setFormInputs] = useState({ username: '', email: '', password: '' })
   const { username, email, password } = formInputs
 
@@ -42,15 +42,19 @@ const SignupForm = ({ register }) => {
 
     const res = await register(username, email, password)
 
+    // if errors
     if (res) {
+      setFormLoading(false)
+
       setSignupResponse({
         show: true,
         errors: res.data.errors
       })
+
+      setTimeout(() => setSignupResponse({ show: false, errors: [] }), 6000)
     }
 
-    setFormLoading(false)
-    setTimeout(() => setSignupResponse({ show: false, errors: [] }), 6000)
+    setAlert('Signedup successfully', 'success')
   }
 
   return (
@@ -131,4 +135,4 @@ const SignupForm = ({ register }) => {
   )
 }
 
-export default connect(null, { register })(SignupForm)
+export default connect(null, { register, setAlert })(SignupForm)

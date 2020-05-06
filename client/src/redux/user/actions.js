@@ -17,9 +17,7 @@ export const loadUser = () => async dispatch => {
     return
   }
 
-  if (token) {
-    setAuthToken(token)
-  }
+  setAuthToken(token)
 
   try {
     const res = await axios.get('/users/auth')
@@ -85,5 +83,7 @@ export const login = (email, password) => async dispatch => {
 }
 
 export const logout = () => dispatch => {
+  localStorage.removeItem('rebook-user-token')
+
   dispatch({ type: LOGOUT })
 }

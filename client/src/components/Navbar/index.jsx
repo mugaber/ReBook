@@ -4,18 +4,24 @@ import './style.scss'
 
 import { connect } from 'react-redux'
 import { logout } from '../../redux/user/actions'
+import { setAlert } from '../../redux/alert/actions'
 
 import Favicon from '../../assets/favicon.ico'
 import { Menu, Segment, Button, Dropdown, Image } from 'semantic-ui-react'
 
 //
 
-const Navbar = ({ history, location, user }) => {
+const Navbar = ({ history, location, user, logout, setAlert }) => {
   const [activeItem, setActiveItem] = useState(location.pathname.slice(1))
 
   const handleMenuItemClick = (e, { name }) => {
     setActiveItem(name)
     history.push(`/${name}`)
+  }
+
+  const handleSignout = () => {
+    logout()
+    setAlert('Logged out successfully', 'success')
   }
 
   return (
@@ -63,7 +69,7 @@ const Navbar = ({ history, location, user }) => {
                     key: 'sign-out',
                     text: 'Sign Out',
                     icon: 'sign out',
-                    onClick: () => logout()
+                    onClick: handleSignout
                   }
                 ]}
               />
@@ -100,4 +106,4 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-export default withRouter(connect(mapStateToProps, { logout })(Navbar))
+export default withRouter(connect(mapStateToProps, { logout, setAlert })(Navbar))

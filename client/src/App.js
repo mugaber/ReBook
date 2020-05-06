@@ -6,6 +6,7 @@ import { loadUser } from './redux/user/actions'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Alerts from './components/Alerts'
 import Spinner from './components/Spinner'
 import ErrorBoundary from './components/ErrorBoundary'
 
@@ -25,6 +26,8 @@ function App({ loadUser }) {
   return (
     <Router>
       <Navbar />
+      <Alerts />
+
       <Switch>
         <ErrorBoundary>
           <Suspense fallback={<Spinner />}>

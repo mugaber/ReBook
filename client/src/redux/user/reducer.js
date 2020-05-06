@@ -9,10 +9,10 @@ import {
 } from '../action_types'
 
 const initialState = {
-  token: localStorage.getItem('rebook-user-token'),
-  isAuthenticated: null,
+  user: null,
+  token: null,
   loading: true,
-  user: null
+  isAuthenticated: null
 }
 
 export default (state = initialState, action) => {
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload
+        user: payload.user
       }
 
     case REGISTER_SUCCESS:
@@ -41,7 +41,6 @@ export default (state = initialState, action) => {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
-      localStorage.removeItem('rebook-user-token')
       return {
         ...state,
         token: null,

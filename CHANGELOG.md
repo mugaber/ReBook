@@ -2,4 +2,5 @@
 
 ## CLIENT
 
-- switched to using redux with other libraries
+- added alert reducer and actions to display alerts to the user
+- added Alert component

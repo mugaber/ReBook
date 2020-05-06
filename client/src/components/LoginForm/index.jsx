@@ -3,6 +3,7 @@ import './login.scss'
 
 import { connect } from 'react-redux'
 import { login } from '../../redux/user/actions'
+import { setAlert } from '../../redux/alert/actions'
 
 import { validateLogin } from '../../utils'
 import { Form, Popup, Button, Message } from 'semantic-ui-react'
@@ -16,7 +17,7 @@ const initFormErrors = {
 
 //
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, setAlert }) => {
   const [formInputs, setFormInputs] = useState({ email: '', password: '' })
   const { email, password } = formInputs
 
@@ -38,15 +39,16 @@ const LoginForm = ({ login }) => {
 
     setFormLoading(true)
 
-    // if only error
     const res = await login(email, password)
 
+    // if only error
     if (res) {
+      setFormLoading(false)
       setLoginResponse({ show: true, errors: res.data.errors })
+      setTimeout(() => setLoginResponse({ show: false, errors: [] }), 6000)
     }
 
-    setFormLoading(false)
-    setTimeout(() => setLoginResponse({ show: false, errors: [] }), 6000)
+    setAlert('Logged in successfully', 'success')
   }
 
   return (
@@ -106,4 +108,4 @@ const LoginForm = ({ login }) => {
   )
 }
 
-export default connect(null, { login })(LoginForm)
+export default connect(null, { login, setAlert })(LoginForm)
