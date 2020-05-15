@@ -7,7 +7,12 @@ export const Alerts = ({ alerts }) => {
     <>
       {alerts.map(({ id, msg, alertType }) => {
         return (
-          <Message key={id} positive={alertType === 'success'} style={{ margin: 0 }}>
+          <Message
+            key={id}
+            style={{ margin: 0 }}
+            success={alertType === 'success'}
+            warning={alertType === 'error'}
+          >
             <Message.Header style={{ textAlign: 'center' }}>{msg}</Message.Header>
           </Message>
         )

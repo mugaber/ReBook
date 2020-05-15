@@ -21,7 +21,7 @@ const SignupPage = lazy(() => import('./pages/Signup'))
 function App({ loadUser }) {
   useEffect(() => {
     loadUser()
-  }, [])
+  }, [loadUser])
 
   return (
     <Router>

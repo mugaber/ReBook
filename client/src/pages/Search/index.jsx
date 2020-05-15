@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import './style.scss'
 
-import ResultItem from '../../components/ResultItem'
+import { connect } from 'react-redux'
+import { setAlert } from '../../redux/alert/actions'
 
+import ResultItem from '../../components/ResultItem'
 import { Search, Grid, Icon, Label } from 'semantic-ui-react'
 
 const parseSearchResults = items =>
   items.map(item => ({
     title: item.volumeInfo.title,
     image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.smallThumbnail : '',
-    booklink: 'to be made',
+    booklink: 'to be made'
   }))
 
 //
 
-const SearchPage = () => {
+const SearchPage = ({ setAlert }) => {
   const [searchString, setSearchString] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
@@ -35,6 +37,7 @@ const SearchPage = () => {
           })
       } catch (err) {
         console.log(err)
+        setAlert('Failed to fetch data, network error', 'error')
       }
 
       setIsLoading(false)
@@ -81,24 +84,24 @@ const SearchPage = () => {
   }
 
   return (
-    <div className='search-page__container'>
-      <div className='search-bar__container'>
+    <div className="search-page__container">
+      <div className="search-bar__container">
         <Search
           autoFocus
-          size='huge'
+          size="huge"
           fluid={true}
-          id='search-bar'
+          id="search-bar"
           loading={isLoading}
           value={searchString}
           results={searchResults}
-          placeholder='Search...'
+          placeholder="Search..."
           onKeyDown={handleSearchEnter}
           onResultSelect={handleResultSelect}
           onSearchChange={handleSearchChange}
         />
 
         {searchResponse.totalItems && (
-          <Label color='teal' floating>
+          <Label color="teal" floating>
             {searchResponse.totalItems}
           </Label>
         )}
@@ -109,14 +112,14 @@ const SearchPage = () => {
               document.getElementById('search-bar').focus()
               setSearchString('')
             }}
-            className='delete-icon'
-            id='delete-icon'
-            name='delete'
+            className="delete-icon"
+            id="delete-icon"
+            name="delete"
           />
         )}
       </div>
 
-      <div className='results__container'>
+      <div className="results__container">
         <Grid stackable container columns={1}>
           {showResults &&
             resultItems.map(item => <ResultItem key={item.id} item={item} />)}
@@ -126,4 +129,4 @@ const SearchPage = () => {
   )
 }
 
-export default SearchPage
+export default connect(null, { setAlert })(SearchPage)
