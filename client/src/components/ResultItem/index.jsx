@@ -9,7 +9,10 @@ import { Grid } from 'semantic-ui-react'
 const ResultItem = ({ item }) => {
   const history = useHistory()
 
-  const handleClick = e => history.push(`/book/${item.id}`, { item })
+  const handleClick = e => {
+    e.stopPropagation()
+    history.push(`/book/${item.id}`, { item })
+  }
 
   return (
     <Grid.Column key={`item-${item.id}`} onClick={handleClick}>

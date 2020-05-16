@@ -13,7 +13,9 @@ const BookItem = ({ item, addBook, removeSave, addRemove }) => {
     addBook(item)
   }
 
-  const handleDelete = () => {}
+  const handleDelete = e => {
+    e.stopPropagation()
+  }
 
   return (
     <Item.Group>
