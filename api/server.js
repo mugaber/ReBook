@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // routes
 app.use('/api/users', require('./routes/users'))
+app.use('/api/books', require('./routes/books'))
 
 // 404
 app.use((req, res) => res.status(404).send('Not found'))

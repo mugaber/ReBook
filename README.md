@@ -1,6 +1,7 @@
 # ReBook
 
 - Search for books.
-- View books (if embed view for the book exists)
+- View books
+- save books to the library
 
 **Using googe books API.**

@@ -1,10 +1,11 @@
 import React from 'react'
+import './alerts.scss'
 import { connect } from 'react-redux'
 import { Message } from 'semantic-ui-react'
 
 export const Alerts = ({ alerts }) => {
   return (
-    <>
+    <div className='alerts__container'>
       {alerts.map(({ id, msg, alertType }) => {
         return (
           <Message
@@ -17,7 +18,7 @@ export const Alerts = ({ alerts }) => {
           </Message>
         )
       })}
-    </>
+    </div>
   )
 }
 

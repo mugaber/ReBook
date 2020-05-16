@@ -1,10 +1,17 @@
 import React from 'react'
-import { Item, Label } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { addBook } from '../../redux/user/actions'
+import { Item, Label, Button } from 'semantic-ui-react'
 
 //
 
-const BookItem = ({ item }) => {
+const BookItem = ({ item, addBook }) => {
   const { volumeInfo, saleInfo, accessInfo } = item
+
+  const handleSave = e => {
+    e.stopPropagation()
+    addBook(item)
+  }
 
   return (
     <Item.Group>
@@ -92,6 +99,10 @@ const BookItem = ({ item }) => {
                 content='Buy'
               />
             )}
+
+            <Button positive onClick={handleSave}>
+              Save
+            </Button>
           </Item.Extra>
         </Item.Content>
       </Item>
@@ -99,4 +110,4 @@ const BookItem = ({ item }) => {
   )
 }
 
-export default BookItem
+export default connect(null, { addBook })(BookItem)

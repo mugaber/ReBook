@@ -44,7 +44,7 @@ const SearchPage = ({ setAlert }) => {
     }
 
     fetchBooks()
-  }, [searchString])
+  }, [searchString, setAlert])
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -84,24 +84,24 @@ const SearchPage = ({ setAlert }) => {
   }
 
   return (
-    <div className="search-page__container">
-      <div className="search-bar__container">
+    <div className='search-page__container'>
+      <div className='search-bar__container'>
         <Search
           autoFocus
-          size="huge"
+          size='huge'
           fluid={true}
-          id="search-bar"
+          id='search-bar'
           loading={isLoading}
           value={searchString}
           results={searchResults}
-          placeholder="Search..."
+          placeholder='Search...'
           onKeyDown={handleSearchEnter}
           onResultSelect={handleResultSelect}
           onSearchChange={handleSearchChange}
         />
 
         {searchResponse.totalItems && (
-          <Label color="teal" floating>
+          <Label color='teal' floating>
             {searchResponse.totalItems}
           </Label>
         )}
@@ -112,14 +112,14 @@ const SearchPage = ({ setAlert }) => {
               document.getElementById('search-bar').focus()
               setSearchString('')
             }}
-            className="delete-icon"
-            id="delete-icon"
-            name="delete"
+            className='delete-icon'
+            id='delete-icon'
+            name='delete'
           />
         )}
       </div>
 
-      <div className="results__container">
+      <div className='results__container'>
         <Grid stackable container columns={1}>
           {showResults &&
             resultItems.map(item => <ResultItem key={item.id} item={item} />)}

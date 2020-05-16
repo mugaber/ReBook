@@ -19,7 +19,8 @@ const UserSchema = new Schema({
   registerDate: {
     type: Date,
     default: new Date()
-  }
+  },
+  books: []
 })
 
 module.exports = mongoose.model('User', UserSchema)
