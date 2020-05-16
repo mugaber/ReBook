@@ -10,9 +10,10 @@ import Alerts from './components/Alerts'
 import Spinner from './components/Spinner'
 import ErrorBoundary from './components/ErrorBoundary'
 
-const BookPage = lazy(() => import('./pages/Book'))
 const HomePage = lazy(() => import('./pages/Home'))
 const SearchPage = lazy(() => import('./pages/Search'))
+const BookPage = lazy(() => import('./pages/Book'))
+const Library = lazy(() => import('./pages/Library'))
 const LoginPage = lazy(() => import('./pages/Login'))
 const SignupPage = lazy(() => import('./pages/Signup'))
 
@@ -31,11 +32,12 @@ function App({ loadUser }) {
       <Switch>
         <ErrorBoundary>
           <Suspense fallback={<Spinner />}>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/search" component={SearchPage} />
-            <Route exact path="/book/:id" component={BookPage} />
-            <Route exact path="/signup" component={SignupPage} />
-            <Route exact path="/login" component={LoginPage} />
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/search' component={SearchPage} />
+            <Route exact path='/book/:id' component={BookPage} />
+            <Route exact path='/library' component={Library} />
+            <Route exact path='/signup' component={SignupPage} />
+            <Route exact path='/login' component={LoginPage} />
           </Suspense>
         </ErrorBoundary>
       </Switch>

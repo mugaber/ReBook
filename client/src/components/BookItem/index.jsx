@@ -5,13 +5,15 @@ import { Item, Label, Button } from 'semantic-ui-react'
 
 //
 
-const BookItem = ({ item, addBook }) => {
+const BookItem = ({ item, addBook, removeSave, addRemove }) => {
   const { volumeInfo, saleInfo, accessInfo } = item
 
   const handleSave = e => {
     e.stopPropagation()
     addBook(item)
   }
+
+  const handleDelete = () => {}
 
   return (
     <Item.Group>
@@ -27,9 +29,9 @@ const BookItem = ({ item, addBook }) => {
 
           <Item.Description>
             {volumeInfo.description
-              ? volumeInfo.description
+              ? `${volumeInfo.description.slice(0, 300)}...`
               : item.searchInfo && item.searchInfo.textSnippet
-              ? item.searchInfo.textSnippet
+              ? `${item.searchInfo.textSnippet.slice(0, 300)}...`
               : 'No description available.'}
           </Item.Description>
 
@@ -100,9 +102,17 @@ const BookItem = ({ item, addBook }) => {
               />
             )}
 
-            <Button positive onClick={handleSave}>
-              Save
-            </Button>
+            {!removeSave && (
+              <Button positive floated='right' onClick={handleSave}>
+                Save
+              </Button>
+            )}
+
+            {addRemove && (
+              <Button negative floated='right' onClick={handleDelete}>
+                Delete
+              </Button>
+            )}
           </Item.Extra>
         </Item.Content>
       </Item>
