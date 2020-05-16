@@ -11,7 +11,7 @@ import {
   List,
   Divider,
   Image,
-  Icon,
+  Icon
 } from 'semantic-ui-react'
 
 //
@@ -24,7 +24,9 @@ const Footer = () => {
           <Grid.Column width={16}>
             <Header inverted as='h2' content='ReBook' />
             <h4>Made with ❤ by Mu Gaber, using Google books API</h4>
-            <p>Currently you can search for books and save them in the library.</p>
+            <p>
+              Currently you can search for books, view books and save them in the library.
+            </p>
           </Grid.Column>
         </Grid>
 

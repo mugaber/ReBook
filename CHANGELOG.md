@@ -1,7 +1,6 @@
 # API
 
-- books route : delete book
-
 ## CLIENT
 
-- delete book function
+- redirect user from home if logged in
+- Library page : check for user before rendering books

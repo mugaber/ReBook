@@ -6,7 +6,16 @@ import BookItem from '../../components/BookItem'
 
 //
 
-export const Library = ({ history, books }) => {
+export const Library = ({ history, user }) => {
+  if (!user.isAuthenticated && !user.user) {
+    history.push('/')
+    return null
+  }
+
+  const {
+    user: { books }
+  } = user
+
   return (
     <div className='library__container'>
       {books.length ? (
@@ -29,7 +38,7 @@ export const Library = ({ history, books }) => {
 }
 
 const mapStateToProps = state => ({
-  books: state.user.user.books
+  user: state.user
 })
 
 export default connect(mapStateToProps)(Library)

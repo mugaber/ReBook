@@ -25,41 +25,43 @@ const Navbar = ({ history, location, user, logout, setAlert }) => {
   }
 
   return (
-    <Segment inverted className="nav-bar__segment">
+    <Segment inverted className='nav-bar__segment'>
       <Menu inverted secondary>
-        <Menu.Item className="rebook-name">
-          <img src={Favicon} alt="favicon" />
+        <Menu.Item className='rebook-name'>
+          <img src={Favicon} alt='favicon' />
           ReBook
         </Menu.Item>
 
-        <Menu.Item name="" active={activeItem === ''} onClick={handleMenuItemClick}>
-          Home
-        </Menu.Item>
+        {!user.isAuthenticated && !user.user && (
+          <Menu.Item name='' active={activeItem === ''} onClick={handleMenuItemClick}>
+            Home
+          </Menu.Item>
+        )}
 
         <Menu.Item
-          name="search"
+          name='search'
           active={activeItem === 'search'}
           onClick={handleMenuItemClick}
         />
 
         {user.isAuthenticated && user.user && (
           <Menu.Item
-            name="library"
+            name='library'
             active={activeItem === 'library'}
             onClick={handleMenuItemClick}
           />
         )}
 
-        <Menu.Menu position="right">
+        <Menu.Menu position='right'>
           <Menu.Item>
             {user.isAuthenticated && user.user ? (
               <Dropdown
-                pointing="top left"
+                pointing='top left'
                 trigger={
                   <>
                     <Image
                       avatar
-                      src="https://react.semantic-ui.com/images/wireframe/square-image.png"
+                      src='https://react.semantic-ui.com/images/wireframe/square-image.png'
                     />
                     {user.user.username}
                   </>
@@ -76,9 +78,9 @@ const Navbar = ({ history, location, user, logout, setAlert }) => {
             ) : (
               <>
                 <Button
-                  as="a"
-                  className="nav-button log-in"
-                  color="green"
+                  as='a'
+                  className='nav-button log-in'
+                  color='green'
                   inverted
                   onClick={() => history.push('/login')}
                 >
@@ -86,9 +88,9 @@ const Navbar = ({ history, location, user, logout, setAlert }) => {
                 </Button>
 
                 <Button
-                  as="a"
+                  as='a'
                   inverted
-                  className="nav-button sign-up"
+                  className='nav-button sign-up'
                   onClick={() => history.push('/signup')}
                 >
                   Sign Up

@@ -10,7 +10,7 @@ import Alerts from './components/Alerts'
 import Spinner from './components/Spinner'
 import ErrorBoundary from './components/ErrorBoundary'
 
-const HomePage = lazy(() => import('./pages/Home'))
+const HomePage = lazy(() => import('./pages/Home/container'))
 const SearchPage = lazy(() => import('./pages/Search'))
 const BookPage = lazy(() => import('./pages/Book'))
 const Library = lazy(() => import('./pages/Library'))
