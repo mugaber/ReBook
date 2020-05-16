@@ -1,5 +1,7 @@
 # API
 
+- books route : delete book
+
 ## CLIENT
 
-- show individual books in the library
+- delete book function

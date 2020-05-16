@@ -1,11 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { addBook } from '../../redux/user/actions'
 import { Item, Label, Button } from 'semantic-ui-react'
+
+import { connect } from 'react-redux'
+import { addBook, deleteBook } from '../../redux/user/actions'
 
 //
 
-const BookItem = ({ item, addBook, removeSave, addRemove }) => {
+const BookItem = ({ item, addBook, deleteBook, removeSave, addRemove }) => {
   const { volumeInfo, saleInfo, accessInfo } = item
 
   const handleSave = e => {
@@ -15,6 +16,7 @@ const BookItem = ({ item, addBook, removeSave, addRemove }) => {
 
   const handleDelete = e => {
     e.stopPropagation()
+    deleteBook(item.id)
   }
 
   return (
@@ -122,4 +124,4 @@ const BookItem = ({ item, addBook, removeSave, addRemove }) => {
   )
 }
 
-export default connect(null, { addBook })(BookItem)
+export default connect(null, { addBook, deleteBook })(BookItem)

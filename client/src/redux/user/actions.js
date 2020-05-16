@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { setAuthToken } from '../../utils'
+import { setAlert } from '../alert/actions'
+
 import {
   REGISTER_SUCCESS,
   USER_LOADED,
@@ -7,9 +9,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from '../action_types'
-import { setAlert } from '../alert/actions'
 
-//
+// Load
 
 export const loadUser = () => async dispatch => {
   const token = localStorage.getItem('rebook-user-token')
@@ -33,6 +34,8 @@ export const loadUser = () => async dispatch => {
     })
   }
 }
+
+// Register
 
 export const register = ({ name, email, password }) => async dispatch => {
   const config = {
@@ -59,6 +62,7 @@ export const register = ({ name, email, password }) => async dispatch => {
 }
 
 // LOGIN USER
+
 export const login = (email, password) => async dispatch => {
   const config = {
     headers: {
@@ -85,13 +89,15 @@ export const login = (email, password) => async dispatch => {
   }
 }
 
+// Logout
+
 export const logout = () => dispatch => {
   localStorage.removeItem('rebook-user-token')
 
   dispatch({ type: LOGOUT })
 }
 
-//
+// Add book
 
 export const addBook = book => async dispatch => {
   const config = {
@@ -116,5 +122,34 @@ export const addBook = book => async dispatch => {
     }
 
     dispatch(setAlert('Error saving book', 'error'))
+  }
+}
+
+// Delete book
+
+export const deleteBook = bookId => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const body = JSON.stringify({ bookId })
+
+  try {
+    await axios.post('/books/delete', body, config)
+    dispatch(setAlert('Book deleted successfully', 'success'))
+    dispatch(loadUser())
+
+    //
+  } catch (err) {
+    const response = err.response
+    console.log(response)
+
+    if (response.data && response.data.error) {
+      return dispatch(setAlert(err.response.data.error, 'error'))
+    }
+
+    dispatch(setAlert('Error deleting book'))
   }
 }
