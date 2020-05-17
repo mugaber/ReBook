@@ -6,7 +6,7 @@ const authMidd = require('../middlewares/auth')
 const { check, validationResult } = require('express-validator')
 
 /**
- * @route     api/users/auth
+ * @route     /users/auth
  * @desc      Auth user & send user data
  * @access    private
  */
@@ -23,7 +23,7 @@ router.get('/auth', authMidd, async (req, res) => {
 })
 
 /**
- * @route     api/users/auth
+ * @route     /users/auth
  * @desc      Login user & send token
  * @access    public
  */
@@ -69,7 +69,7 @@ router.post(
 )
 
 /**
- * @rout      api/users
+ * @rout      /users
  * @desc      register user if not exists & send token
  * @access    public
  */

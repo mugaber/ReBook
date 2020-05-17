@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "description": "search books, save to the library",
   "main": "server.js",
-  "scripts": {
-    "client": "npm run start --prefix ../client",
-    "server": "nodemon server.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-  },
+  "license": "MIT",
+  "author": "mg",
   "keywords": [
     "googel-books-api"
   ],
-  "author": "mg",
-  "license": "MIT",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "client": "npm run start --prefix client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
   "dependencies": {
     "bcrypt": "^4.0.1",
     "compression": "^1.7.4",

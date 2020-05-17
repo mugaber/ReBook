@@ -1,6 +1,7 @@
-const express = require('express')
-
 require('dotenv').config()
+const path = require('path')
+
+const express = require('express')
 const connectDB = require('./config/db')
 
 const cors = require('cors')
@@ -21,8 +22,17 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // routes
-app.use('/api/users', require('./routes/users'))
-app.use('/api/books', require('./routes/books'))
+app.use('/users', require('./routes/users'))
+app.use('/books', require('./routes/books'))
+
+// serve static files
+if ((process.env.NODE_ENV = 'production')) {
+  app.use(express.static('client/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 // 404
 app.use((req, res) => res.status(404).send('Not found'))

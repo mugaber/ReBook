@@ -5,7 +5,7 @@ const auth = require('../middlewares/auth')
 route.use(auth)
 
 /**
- * @route     api/books POST
+ * @route     /books POST
  * @desc      add a book to the user books
  * @access    private
  */
@@ -54,7 +54,7 @@ route.post('/', async (req, res) => {
 })
 
 /**
- * @route     api/books/delte POST
+ * @route     /books/delte POST
  * @desc      delete a book from user books
  * @access    private
  */
